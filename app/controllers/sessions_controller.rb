@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       Session.create!(user: user, token: token)
       render json: { token: token }, status: :created
     else
-      render json: { error: "Email atau password salah" }, status: :unauthorized
+      render json: { error: " Wrong Email or password" }, status: :unauthorized
     end
   end
 end

@@ -7,16 +7,16 @@ class TransactionsController < ApplicationController
       render json: { error: 'Target wallet not found' }, status: :not_found and return
     end
 
-    # Pastikan source_wallet ada jika ini adalah debit
+    
     if transaction_params[:transaction_type] == 'debit' && source_wallet.nil?
       render json: { error: 'Source wallet not found for debit transaction' }, status: :not_found and return
     end
 
-    # Buat transaksi
+  
     transaction = Transaction.new(transaction_params)
 
     if transaction.save
-      # Update balance jika transaksi berhasil
+  
       target_wallet.update(balance: target_wallet.balance + transaction.amount) if transaction.transaction_type == 'credit'
       source_wallet.update(balance: source_wallet.balance - transaction.amount) if transaction.transaction_type == 'debit'
       

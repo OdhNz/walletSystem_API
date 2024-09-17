@@ -18,12 +18,9 @@ Rails.application.routes.draw do
     end
   end
 
-  post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
-
-  resources :users, only: [:create, :index] # Rute untuk membuat user
-  resources :sessions, only: [:create, :destroy] # Rute untuk sesi (login/logout)
-  resources :wallets, only: [:create]  # Tambahkan ini untuk membuat wallet
+  resources :users, only: [:create, :index] 
+  resources :sessions, only: [:create, :destroy]
+  resources :wallets, only: [:create] 
   resources :transactions, only: [:create]
 
   resources :wallets, only: [:show]
